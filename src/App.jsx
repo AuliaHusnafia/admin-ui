@@ -51,7 +51,7 @@ function App() {
               </label>
             </div>
             <button
-              className="h12 rounded-md text-sm bg-primary w-full text-white"
+              className="h-12 rounded-md text-sm bg-primary w-full text-white"
               type="submit"
             >
               Login
