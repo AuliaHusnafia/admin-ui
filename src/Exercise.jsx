@@ -2,6 +2,13 @@ import React from "react";
 import UserCard from "./UserCard";
 
 function Exercise() {
+  // const users = [
+  //   name: "Apri",
+  //   email: apri@gmail.com",
+  //   street: "Jl. Imam Bonjol",
+  //   city: "Semarang",
+  //   age: 21,
+  // };
   return (
     <>
       <div className="min-h-screen bg-gray-100 p-6">
