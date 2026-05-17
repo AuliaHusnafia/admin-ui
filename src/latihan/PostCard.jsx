@@ -12,18 +12,12 @@ function PostCard({ id, userId, title, body }) {
       "
     >
       {/* Bagian Atas - Judul */}
-      <h2
-        className="text-center font-bold capitalize leading-snug"
-        style={{ fontSize: "0.6rem" }}
-      >
+      <h2 className="text-center font-bold capitalize leading-snug text-xs">
         {title}
       </h2>
 
       {/* Bagian Tengah - Isi */}
-      <p
-        className="text-center text-gray-500 leading-relaxed flex-1"
-        style={{ fontSize: "0.55rem" }}
-      >
+      <p className="text-center text-gray-500 leading-relaxed flex-1 text-xs">
         {body}
       </p>
 
@@ -31,14 +25,13 @@ function PostCard({ id, userId, title, body }) {
       <button
         onClick={() => setIsClicked(true)}
         className={`
-          py-1 px-2 rounded text-white font-medium w-full
+          py-1.5 px-2 rounded text-white text-xs font-medium w-full
           transition-all duration-300
           ${isClicked
             ? "bg-special-red2 hover:brightness-125"
             : "bg-gray-600 hover:brightness-125"
           }
         `}
-        style={{ fontSize: "0.55rem" }}
       >
         {isClicked ? "Tombol sudah diklik" : "Silakan Klik"}
       </button>
