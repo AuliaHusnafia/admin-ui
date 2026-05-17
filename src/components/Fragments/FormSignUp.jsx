@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Button from "../Elements/Button";
 import LabeledInput from "../Elements/LabeledInput";
+import { Link } from "react-router-dom";
 
 const GoogleIcon = () => (
   <svg viewBox="0 0 24 24" className="w-5 h-5 flex-shrink-0" xmlns="http://www.w3.org/2000/svg">
@@ -79,9 +80,9 @@ function FormSignUp() {
 
       <p className="text-center mt-4 text-sm text-gray-01">
         Already have an account?{" "}
-        <a href="/signin" className="text-primary font-semibold hover:underline">
+        <Link to="/login" className="text-primary font-semibold hover:underline">
           Sign in here
-        </a>
+        </Link>
       </p>
     </form>
   );

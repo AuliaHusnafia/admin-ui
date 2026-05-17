@@ -1,20 +1,32 @@
 import "./App.css";
 import SignInPage from "./pages/SignIn";
 import SignUpPage from "./pages/SignUp";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import ErrorPage from "./pages/ErrorPage";
+import { createBrowserRouter, RouterProvider, Link } from "react-router-dom"; // ← tambah Link di sini
 
 function App() {
   const myRouter = createBrowserRouter([
     {
       path: "/",
-      element: <div>Halaman Utama</div>,
+      element: (
+        <div className="flex justify-center items-center min-h-screen">
+          <Link to="/login" className="p-2 m-5 bg-primary text-white">
+            Login
+          </Link>
+          |
+          <Link to="/register" className="p-2 m-5 bg-primary text-white">
+            Register
+          </Link>
+        </div>
+      ),
+      errorElement: <ErrorPage />,
     },
     {
-      path: "/signin",
+      path: "/login",
       element: <SignInPage />,
     },
     {
-      path: "/signup",
+      path: "/register",
       element: <SignUpPage />,
     },
   ]);
