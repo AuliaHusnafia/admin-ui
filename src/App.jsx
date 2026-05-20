@@ -2,7 +2,8 @@ import "./App.css";
 import SignInPage from "./pages/SignIn";
 import SignUpPage from "./pages/SignUp";
 import ErrorPage from "./pages/ErrorPage";
-import { createBrowserRouter, RouterProvider, Link } from "react-router-dom"; // ← tambah Link di sini
+import Dashboard from "./pages/Dashboard"; // <-- import Dashboard (bukan DashboardPage)
+import { createBrowserRouter, RouterProvider, Link } from "react-router-dom";
 
 function App() {
   const myRouter = createBrowserRouter([
@@ -19,6 +20,11 @@ function App() {
           </Link>
         </div>
       ),
+      errorElement: <ErrorPage />,
+    },
+    {
+      path: "/dashboard",  // <-- ganti path jadi /dashboard
+      element: <Dashboard />,
       errorElement: <ErrorPage />,
     },
     {
