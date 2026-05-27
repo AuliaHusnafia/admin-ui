@@ -2,7 +2,7 @@ import "./App.css";
 import SignInPage from "./pages/SignIn";
 import SignUpPage from "./pages/SignUp";
 import ErrorPage from "./pages/ErrorPage";
-import Dashboard from "./pages/Dashboard"; // <-- import Dashboard (bukan DashboardPage)
+import Dashboard from "./pages/Dashboard";
 import { createBrowserRouter, RouterProvider, Link } from "react-router-dom";
 
 function App() {
@@ -11,11 +11,10 @@ function App() {
       path: "/",
       element: (
         <div className="flex justify-center items-center min-h-screen">
-          <Link to="/login" className="p-2 m-5 bg-primary text-white">
+          <Link to="/login" className="p-2 m-5 bg-blue-500 text-white rounded">
             Login
           </Link>
-          |
-          <Link to="/register" className="p-2 m-5 bg-primary text-white">
+          <Link to="/register" className="p-2 m-5 bg-green-500 text-white rounded">
             Register
           </Link>
         </div>
@@ -23,7 +22,42 @@ function App() {
       errorElement: <ErrorPage />,
     },
     {
-      path: "/dashboard",  // <-- ganti path jadi /dashboard
+      path: "/dashboard",
+      element: <Dashboard />,
+      errorElement: <ErrorPage />,
+    },
+    {
+      path: "/overview",
+      element: <Dashboard />,
+      errorElement: <ErrorPage />,
+    },
+    {
+      path: "/balances",
+      element: <Dashboard />,
+      errorElement: <ErrorPage />,
+    },
+    {
+      path: "/transaction",
+      element: <Dashboard />,
+      errorElement: <ErrorPage />,
+    },
+    {
+      path: "/bills",
+      element: <Dashboard />,
+      errorElement: <ErrorPage />,
+    },
+    {
+      path: "/expenses",
+      element: <Dashboard />,
+      errorElement: <ErrorPage />,
+    },
+    {
+      path: "/goals",
+      element: <Dashboard />,
+      errorElement: <ErrorPage />,
+    },
+    {
+      path: "/settings",
       element: <Dashboard />,
       errorElement: <ErrorPage />,
     },

@@ -26,3 +26,7 @@ html {
   --color-special-red: #e73d1c;
   --color-special-red2: #b83016;
 }
+body {
+  font-family: "Inter", sans-serif;
+  background: #f4f5f7;
+}
