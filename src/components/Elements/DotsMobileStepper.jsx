@@ -4,11 +4,13 @@ import MobileStepper from "@mui/material/MobileStepper";
 import Button from "@mui/material/Button";
 import KeyboardArrowLeft from "@mui/icons-material/KeyboardArrowLeft";
 import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight";
+import { ThemeContext } from "../../context/themeContext";
 
 export default function DotsMobileStepper(props) {
   const { data } = props;
+  const { theme } = React.useContext(ThemeContext);
 
-  const theme = useTheme();
+  const muiTheme = useTheme();
   const [activeStep, setActiveStep] = React.useState(0);
 
   const handleNext = () => {
@@ -30,12 +32,8 @@ export default function DotsMobileStepper(props) {
         sx={{
           maxWidth: "400",
           flexGrow: 1,
-          "& .MuiMobileStepper-dot": { 
-	          backgroundColor: "darkgray" 
-	        },
-          "& .MuiMobileStepper-dotActive": {
-            backgroundColor: "#299D91",
-          },
+          "& .MuiMobileStepper-dot": { backgroundColor: "darkgray" },
+          "& .MuiMobileStepper-dotActive": { backgroundColor: theme.color },
         }}
         nextButton={
           <Button
@@ -45,7 +43,7 @@ export default function DotsMobileStepper(props) {
             sx={{ color: "black" }}
           >
             Next
-            {theme.direction === "rtl" ? (
+            {muiTheme.direction === "rtl" ? (
               <KeyboardArrowLeft />
             ) : (
               <KeyboardArrowRight />
@@ -57,7 +55,7 @@ export default function DotsMobileStepper(props) {
           onClick={handleBack}
           disabled={activeStep === 0}
           sx={{ color: "black" }}>
-            {theme.direction === "rtl" ? (
+            {muiTheme.direction === "rtl" ? (
               <KeyboardArrowRight />
             ) : (
               <KeyboardArrowLeft />
