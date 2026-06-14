@@ -7,7 +7,7 @@ function AuthLayout(props) {
   const { theme } = useContext(ThemeContext);
 
   return (
-    <div className={`min-h-screen bg-special-mainBg flex justify-center items-center ${theme.name}`}>
+    <div className={`min-h-screen bg-special-mainBg flex justify-center items-center ${theme.name} auth-bg`}>
       <div className="w-full max-w-md bg-white rounded-[40px] shadow-xl p-10">
         <div className="mb-8">
           <Logo />

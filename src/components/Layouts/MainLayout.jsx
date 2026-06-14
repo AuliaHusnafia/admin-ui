@@ -1,11 +1,13 @@
 // src/components/Layouts/MainLayout.jsx
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import Logo from "../Elements/Logo";
 import Input from "../Elements/Input";
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import Icon from "../Elements/Icon";
 import { NavLink } from "react-router-dom";
 import { ThemeContext } from "../../context/themeContext";
+import { AuthContext } from "../../context/authContext";
+import { logoutService } from "../../services/authService";
 
 function MainLayout(props) {
   const { children } = props;
@@ -29,6 +31,20 @@ function MainLayout(props) {
     { id: 6, name: "Goals", icon: <Icon.Goal />, link: "/goals" },
     { id: 7, name: "Settings", icon: <Icon.Setting />, link: "/settings" },
   ];
+
+  const { user, logout } = useContext(AuthContext);
+
+  const handleLogout = async () => {
+    try {
+      await logoutService();
+      logout();
+    } catch (err) {
+      console.error(err);
+      if (err.status === 401) {
+        logout();
+      }
+    }
+  };
 
   return (
     <>
@@ -54,7 +70,7 @@ function MainLayout(props) {
               ))}
             </nav>
           </div>
-          					<div>
+          <div>
             Themes
             <div className="flex flex-col sm:flex-row gap-2 items-center">
               {themes.map((t) => (
@@ -67,18 +83,18 @@ function MainLayout(props) {
             </div>
           </div>
           <div>
-            <NavLink to="/login">
-            <div className="flex bg-special-bg3 text-white px-4 py-3 rounded-md cursor-pointer mb-8">
-              <div className="mx-auto sm:mx-0 text-primary">
-                <Icon.Logout />
+            <div onClick={handleLogout} className="cursor-pointer">
+              <div className="flex bg-special-bg3 text-white px-4 py-3 rounded-md cursor-pointer mb-8">
+                <div className="mx-auto sm:mx-0 text-primary">
+                  <Icon.Logout />
+                </div>
+                <div className="ms-3 hidden sm:block">Logout</div>
               </div>
-              <div className="ms-3 hidden sm:block">Logout</div>
             </div>
-            </NavLink>
             <div className="flex justify-between items-center">
               <div>Avatar</div>
               <div className="hidden sm:block">
-                Username
+                {user?.name}
                 <br />
                 View Profile
               </div>
@@ -91,7 +107,7 @@ function MainLayout(props) {
         <div className="bg-special-mainBg flex-1 flex flex-col">
           <header className="border border-b border-gray-05 px-6 py-7 flex justify-between items-center">
             <div className="flex items-center">
-              <div className="font-bold text-2xl me-6">Username</div>
+              <div className="font-bold text-2xl me-6">{user?.name}</div>
               <div className="text-gray-03 hidden sm:block">
                 <Icon.ChevronRight size={20} />
                 <span>May 19, 2023</span>

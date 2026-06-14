@@ -5,7 +5,7 @@ import CompositionExample from "../Elements/CompositionExample";
 
 function CardGoal(props) {
   const { data } = props;
-  const chartValue = (data.presentAmount / data.targetAmount) * 100;
+  const chartValue = (data.present_amount / data.target_amount) * 100;
 
   return (
     <>

@@ -12,7 +12,7 @@ const GoogleIcon = () => (
   </svg>
 );
 
-function FormSignUp() {
+function FormSignUp({ onSubmit }) {
   const [form, setForm] = useState({ name: "", email: "", password: "" });
 
   const handleChange = (field) => (e) => {
@@ -21,7 +21,9 @@ function FormSignUp() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Sign up payload:", form);
+    if (onSubmit) {
+      onSubmit(form.name, form.email, form.password);
+    }
   };
 
   return (
