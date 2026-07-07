@@ -47,6 +47,54 @@ html {
   --color-primary: #8b4513;
 }
 
+.light {
+  --color-special-mainBg: #f4f5f7;
+  --color-defaultBlack: #191919;
+  color: #111827;
+}
+
+.dark {
+  --color-special-mainBg: #0f172a;
+  --color-defaultBlack: #030712;
+  color: #e2e8f0;
+}
+
+.dark .bg-special-mainBg {
+  background-color: #111827;
+}
+
+.dark .bg-white {
+  background-color: #0f172a;
+}
+
+.dark .text-gray-800 {
+  color: #f8fafc;
+}
+
+.dark .text-gray-900 {
+  color: #e2e8f0;
+}
+
+.dark .text-gray-500 {
+  color: #94a3b8;
+}
+
+.dark .border-gray-05 {
+  border-color: #334155;
+}
+
+.dark .border-gray-300 {
+  border-color: #475569;
+}
+
+.dark .text-gray-700 {
+  color: #e2e8f0;
+}
+
+.dark .bg-special-bg3 {
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
 body {
   font-family: "Inter", sans-serif;
   background: #f4f5f7;

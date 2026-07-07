@@ -1,9 +1,10 @@
-import "./App.css";
+﻿import "./App.css";
 import SignInPage from "./pages/SignIn";
 import SignUpPage from "./pages/SignUp";
 import ErrorPage from "./pages/ErrorPage";
 import Dashboard from "./pages/Dashboard";
 import BalancePage from "./pages/balance";
+import ExpensePage from "./pages/Expense";
 import {
   createBrowserRouter,
   Navigate,
@@ -20,7 +21,7 @@ function App() {
   };
 
   const NotRequireAuth = ({ children }) => {
-    return user ? <Navigate to="/" replace /> : children;
+    return user ? <Navigate to="/overview" replace /> : children;
   };
 
   const myRouter = createBrowserRouter([
@@ -28,10 +29,18 @@ function App() {
       path: "/",
       element: (
         <RequireAuth>
-          <Dashboard />
+          <Navigate to="/overview" replace />
         </RequireAuth>
       ),
       errorElement: <ErrorPage />,
+    },
+    {
+      path: "/overview",
+      element: (
+        <RequireAuth>
+          <Dashboard />
+        </RequireAuth>
+      ),
     },
     {
       path: "/login",
@@ -54,6 +63,22 @@ function App() {
       element: (
         <RequireAuth>
           <BalancePage />
+        </RequireAuth>
+      ),
+    },
+    {
+      path: "/expense",
+      element: (
+        <RequireAuth>
+          <ExpensePage />
+        </RequireAuth>
+      ),
+    },
+    {
+      path: "/expenses",
+      element: (
+        <RequireAuth>
+          <ExpensePage />
         </RequireAuth>
       ),
     },

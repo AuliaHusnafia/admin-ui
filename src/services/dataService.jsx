@@ -11,7 +11,59 @@ export const goalService = async () => {
                 Authorization: `Bearer ${token}`,
             },
         });
-        return response.data.data[0];
+        return response.data.data;
+    } catch (error) {
+        throw {
+            status: error.response?.status,
+            msg: error.response?.data?.msg,
+        };
+    }
+};
+
+export const expenseService = async () => {
+    try {
+        const token = localStorage.getItem("token");
+
+        const response = await axios.get(`${API_URL}/expenses`, {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        });
+
+        // Log raw response so we can see the actual structure
+        console.log("Raw expenses response:", response.data);
+
+        const raw = response.data;
+        // Handle various possible shapes: array, { data: [...] }, { data: { data: [...] } }
+        if (Array.isArray(raw)) return raw;
+        if (Array.isArray(raw?.data)) return raw.data;
+        if (Array.isArray(raw?.data?.data)) return raw.data.data;
+        return [];
+    } catch (error) {
+        throw {
+            status: error.response?.status,
+            msg: error.response?.data?.msg,
+        };
+    }
+};
+
+export const billService = async () => {
+    try {
+        const token = localStorage.getItem("token");
+
+        const response = await axios.get(`${API_URL}/bills`, {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        });
+
+        console.log("Raw bills response:", response.data);
+
+        const raw = response.data;
+        if (Array.isArray(raw)) return raw;
+        if (Array.isArray(raw?.data)) return raw.data;
+        if (Array.isArray(raw?.data?.data)) return raw.data.data;
+        return [];
     } catch (error) {
         throw {
             status: error.response?.status,
