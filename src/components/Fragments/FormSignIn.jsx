@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import LabeledInput from "../Elements/LabeledInput";
 import CheckBox from "../Elements/CheckBox";
 import Button from "../Elements/Button";
@@ -6,6 +6,8 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
+import { ModeContext } from "../../context/modeContext.jsx";
+import WbSunnyIcon from '@mui/icons-material/WbSunny';
 
 const SignInSchema = Yup.object().shape({
   email: Yup.string().email("Email tidak valid").required("Email wajib diisi"),
@@ -13,6 +15,7 @@ const SignInSchema = Yup.object().shape({
 });
 
 function FormSignIn({ onSubmit }) {
+  const { toggleMode } = useContext(ModeContext);
 
   return (
     <>
@@ -90,6 +93,11 @@ function FormSignIn({ onSubmit }) {
                   )}
                 </Field>
               </div>
+              <div className="mb-4 text-right">
+                <Link to="#" className="text-primary text-sm font-semibold">
+                  Forgot Password
+                </Link>
+              </div>
               {/* BUTTON */}
               <Button>{isSubmitting ? "Loading..." : "Login"}</Button>
             </Form>
@@ -156,6 +164,16 @@ function FormSignIn({ onSubmit }) {
         </Link>
       </div>
       {/* link end */}
+      <div className="mt-8 flex justify-center">
+        <button
+          type="button"
+          onClick={toggleMode}
+          className="rounded-full border border-gray-200 bg-white p-3 text-gray-800 shadow-sm transition hover:bg-gray-100"
+          aria-label="Toggle dark mode"
+        >
+          <WbSunnyIcon className="text-yellow-500" />
+        </button>
+      </div>
     </>
   );
 }

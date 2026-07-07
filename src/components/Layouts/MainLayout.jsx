@@ -1,16 +1,21 @@
 // src/components/Layouts/MainLayout.jsx
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import Logo from "../Elements/Logo";
 import Input from "../Elements/Input";
 import NotificationsIcon from '@mui/icons-material/Notifications';
+import Backdrop from '@mui/material/Backdrop';
+import CircularProgress from '@mui/material/CircularProgress';
+import WbSunnyIcon from '@mui/icons-material/WbSunny';
 import Icon from "../Elements/Icon";
 import { NavLink } from "react-router-dom";
 import { ThemeContext } from "../../context/themeContext";
+import { ModeContext } from "../../context/modeContext.jsx";
 import { AuthContext } from "../../context/authContext";
 import { logoutService } from "../../services/authService";
 
 function MainLayout(props) {
   const { children } = props;
+  const [loading, setLoading] = useState(false);
 
   const themes = [
     { name: "theme-green", bgcolor: "bg-[#299D91]", color: "#299D91" },
@@ -21,6 +26,7 @@ function MainLayout(props) {
   ];
 
   const { theme, setTheme } = useContext(ThemeContext);
+  const { mode, toggleMode } = useContext(ModeContext);
 
   const menu = [
     { id: 1, name: "Overview", icon: <Icon.Overview />, link: "/overview" },
@@ -35,6 +41,7 @@ function MainLayout(props) {
   const { user, logout } = useContext(AuthContext);
 
   const handleLogout = async () => {
+    setLoading(true);
     try {
       await logoutService();
       logout();
@@ -43,6 +50,8 @@ function MainLayout(props) {
       if (err.status === 401) {
         logout();
       }
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -113,15 +122,27 @@ function MainLayout(props) {
                 <span>May 19, 2023</span>
               </div>
             </div>
-            <div className="flex items-center">
-              <div className="me-10">
-                <NotificationsIcon className="text-primary scale-110" /></div>
+            <div className="flex items-center gap-4">
+              <div className="flex items-center gap-3">
+                <NotificationsIcon className="text-primary scale-110" />
+                <button
+                  type="button"
+                  onClick={toggleMode}
+                  className="rounded-full border border-gray-200 bg-white p-2 text-gray-800 shadow-sm transition hover:bg-gray-100"
+                  aria-label="Toggle dark mode"
+                >
+                  <WbSunnyIcon className={mode === "dark" ? "text-yellow-300" : "text-yellow-500"} />
+                </button>
+              </div>
               <Input backgroundColor="bg-white" border="border-white" />
             </div>
           </header>
           <main className="flex-1 px-6 py-4">{children}</main>
         </div>
       </div>
+      <Backdrop sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }} open={loading}>
+        <CircularProgress color="inherit" />
+      </Backdrop>
     </>
   );
 }
